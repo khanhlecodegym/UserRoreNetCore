@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
+@using CompanyMVC.ConnectDB
+
+<!DOCTYPE html>
+
+@inject SignInManager<ConfArchUser> SignInManager
+@inject UserManager<ConfArchUser> UserManager
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CompanyMVC</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+</head>
+<body>
+    <header>
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-7 titlecol">
+            <span class="title">@ViewBag.Title</span>
+        </div>
+
+        <div class="col-md-2">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <span>@UserManager.GetUserName(User)</span>
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Logoff">Log off</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" asp-controller="Account" asp-action="Register">Register</a>
+            }
+        </div>
+    </header>
+
+    <div id="main">
+        <article>@RenderBody()</article>
+        <nav>Nav</nav>
+        <aside>Aside</aside>
+    </div>
+
+    <footer>Footer</footer>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+
+
+
+
